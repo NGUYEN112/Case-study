@@ -1,18 +1,17 @@
 var myGamePiece;
 var myObstacles = [];
 var myScore;
-var widthwd = window.width;
 
 function startGame() {
-    myGamePiece = new component(25, 50, "black", 10, 540,);
+    myGamePiece = new component(50, 75, "run1.jpg", 10, 540, "image");
     myGamePiece.gravity = 20;
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myScore = new component("30px", "Consolas", "black", 1000, 40, "text");
     myGameArea.start();
 }
 var myGameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
-        this.canvas.width = 960;
+        this.canvas.width = window.innerWidth - 2;
         this.canvas.height = 270;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
@@ -106,10 +105,10 @@ function updateGameArea() {
         minWidth = 50;
         maxWidth = 130;
         rdwidth = Math.floor(Math.random() * (maxWidth - minWidth + 1) + minWidth);
-        myObstacles.push(new component(30, 30, "green", x, rdheight + rdwidth));
+        myObstacles.push(new component(30, x - rdheight - rdwidth, "tree.jpg", x, rdheight + rdwidth, "image"));
     }
     for (i = 0; i < myObstacles.length; i += 1) {
-        myObstacles[i].x += -4;
+        myObstacles[i].x += -5;
         myObstacles[i].update();
     }
     myScore.text = "SCORE: " + myGameArea.frameNo;
@@ -127,8 +126,24 @@ function everyinterval(n) {
     return false;
 }
 
+
+// let switchPic = myGameArea.frameNo % 4;
+// switch (switchPic) {
+//     case 0:
+//         this.image = "run1.jpg";
+//         break;
+//     case 1:
+//         this.image = "run2.jpg";
+//         break;
+//     case 2:
+//         this.image = "run3.jpg";
+//         break;
+//     case 3:
+//         this.image = "run4.jpg";
+//         break;
+// }
 function startgame(n) {
-    if (!myGameArea.interval) { myGameArea.interval = setInterval(updateGameArea, 10); }
+    if (!myGameArea.interval) { myGameArea.interval = setInterval(updateGameArea, 20); }
 
     myGamePiece.gravity = n;
 }

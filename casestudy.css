@@ -1,5 +1,6 @@
 canvas {
     border-bottom: #ff0000 solid 2px;
+    width: 100%;
 }
 .lines{
     width: 10px;
