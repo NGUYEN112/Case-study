@@ -1,0 +1,10 @@
+canvas {
+    border-bottom: #ff0000 solid 2px;
+}
+.lines{
+    width: 10px;
+    height: 100px;
+    background: white;
+    position: absolute;
+    margin-left: 195px;
+}
