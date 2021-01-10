@@ -9,3 +9,34 @@ canvas {
     position: absolute;
     margin-left: 195px;
 }
+button {
+    padding: 10px;
+    text-align: center;
+}
+#start {
+     display: block;
+     text-align: center;
+     color: blanchedalmond;
+     background-color: white;
+ }
+ .bstart {
+     background-color: red;
+     color: white;
+     font-family: fantasy;
+ }
+#logo {
+    width: 100%;
+    text-align: center;
+}
+#reset {
+    display : none;
+    text-align: center;
+    text-emphasis-color: black;
+    color: black;
+    background-color: white;
+}
+.breset {
+    background-color: white;
+    color: black;
+    font-family: fantasy;
+}

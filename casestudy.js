@@ -3,7 +3,7 @@ var myObstacles = [];
 var myScore;
 
 function startGame() {
-    myGamePiece = new component(50, 75, "run1.jpg", 10, 540, "image");
+    myGamePiece = new component(60, 100, "ironman.jpg", 10, 540, "image");
     myGamePiece.gravity = 20;
     myScore = new component("30px", "Consolas", "black", 1000, 40, "text");
     myGameArea.start();
@@ -11,8 +11,8 @@ function startGame() {
 var myGameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
-        this.canvas.width = window.innerWidth - 2;
-        this.canvas.height = 270;
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = 300;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -89,9 +89,11 @@ function component(width, height, color, x, y, type) {
     }
 }
 function updateGameArea() {
-    var x, rdheight, rdwidth, minHeight, maxHeight, minWidth, maxWidth;
+    let x,y, rdheight, rdwidth, minHeight, maxHeight, minWidth, maxWidth;
+    let obsPic = ["ultron11.png","ultron2.jpg","ultron3.jpg"];
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
+            document.getElementById("reset").style.display = 'block';
             return;
         }
     }
@@ -99,13 +101,14 @@ function updateGameArea() {
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
         x = myGameArea.canvas.width;
+        y = Math.floor(Math.random()* obsPic.length);
         minHeight = 20;
-        maxHeight = 130;
+        maxHeight = 100;
         rdheight = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
         minWidth = 50;
-        maxWidth = 130;
+        maxWidth = 100;
         rdwidth = Math.floor(Math.random() * (maxWidth - minWidth + 1) + minWidth);
-        myObstacles.push(new component(30, x - rdheight - rdwidth, "tree.jpg", x, rdheight + rdwidth, "image"));
+        myObstacles.push(new component(60, 100, obsPic[y], x, rdheight + rdwidth, "image"));
     }
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -5;
@@ -115,10 +118,11 @@ function updateGameArea() {
     myScore.update();
     myGamePiece.speedX = 0;
     myGamePiece.speedY = 0;
-    if (myGameArea.key && myGameArea.key == 38) { myGamePiece.speedY = -5; }
-    if (myGameArea.key && myGameArea.key == 40) { myGamePiece.speedY = 5; }
+    if (myGameArea.key && myGameArea.key == 38) { myGamePiece.speedY = -5; myGamePiece.image.src = "ironman1.jpg" }
+    else myGamePiece.image.src = "ironman.jpg";
     myGamePiece.newPos();
     myGamePiece.update();
+
 }
 
 function everyinterval(n) {
@@ -126,24 +130,16 @@ function everyinterval(n) {
     return false;
 }
 
-
-// let switchPic = myGameArea.frameNo % 4;
-// switch (switchPic) {
-//     case 0:
-//         this.image = "run1.jpg";
-//         break;
-//     case 1:
-//         this.image = "run2.jpg";
-//         break;
-//     case 2:
-//         this.image = "run3.jpg";
-//         break;
-//     case 3:
-//         this.image = "run4.jpg";
-//         break;
-// }
 function startgame(n) {
     if (!myGameArea.interval) { myGameArea.interval = setInterval(updateGameArea, 20); }
-
     myGamePiece.gravity = n;
 }
+var x = document.getElementById("myAudio");
+function play() {
+    x.play();
+    document.getElementById("start").style.display = 'none';
+}
+
+function ResetGame(){
+    window.location.reload();
+} 

@@ -10,8 +10,16 @@
 
 <body onload="startGame()">
     <br>
-    <button onmousedown="startgame(-0.2)" onmouseup="startgame(0.05)" >StartGame</button>
-    <p>Hold Uppresskey to jump higher</p>
+    <div id="start" onclick="play()">
+        <button class="bstart" onmousedown="startgame(-0.2)" onmouseup="startgame(0.05)">Start Game</button>
+    </div>
+    <div id="reset">
+        <button class="breset" type="submit" onClick="ResetGame()">Reset Game</button>
+    </div>
+    <audio id="myAudio" src="music.mp3"></audio>
+    <div id="logo">
+        <img src="marvel1.jpg">
+    </div>
     <script src="casestudy.js">
     </script>
 </body>
